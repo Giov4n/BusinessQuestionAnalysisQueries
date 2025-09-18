@@ -77,7 +77,8 @@ ORDER BY COUNT(customer_id)::smallint DESC
 LIMIT 10)	
 SELECT customer_id::SMALLINT as top_customers,
 	first_name||' '||last_name AS customer_name,
-	cities, country,
+	cities,
+	country,
 	SUM(amount) AS amount_paid
 FROM payment	
 INNER JOIN customer USING (customer_id)	
