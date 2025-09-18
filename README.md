@@ -5,11 +5,11 @@ Rockbuster Stealth LLC, a movie rental company, is adapting to the rise of strea
 
 ## Key Questions
 To drive data-driven insights, it is essential to answer the following key questions.  
-●  Which movies contributed the most/least to revenue gain?  
-●  What was the average rental duration for all videos?  
-●  Which countries are Rockbuster customers based in?  
-●  Where are customers with a high lifetime value based?  
-●  Do sales figures vary between geographic regions?  
+1.  Which movies contributed the most/least to revenue gain?  
+2.  What was the average rental duration for all videos?  
+3.  Which countries are Rockbuster customers based in?  
+4.  Where are customers with a high lifetime value based?  
+5.  Do sales figures vary between geographic regions?  
 
 ## Data
 The data set used for this analysis included the company's movie catalogue, customer demographic, and sales data divided into 15 tables:  
