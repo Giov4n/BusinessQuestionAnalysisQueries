@@ -19,6 +19,6 @@ The data set used for this analysis included the company's movie catalogue, cust
 The TAR file that includes the data set used for this project can be accessed here: [Rockbuster](http://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip).
 
 ## Analysis Deliverables
-●  Data Dictionary: A document providing clear standardized descriptions and relationships about the data.  
-●  SQL Technical Queries: A collection of structured query files used to analyze the data set to extract insights.  
+●  [Data Dictionary](Data_Dictionary.pdf): A document providing clear standardized descriptions and relationships about the data.  
+●  [SQL Technical Queries](Technical_SQL_Queries): A collection of structured query files used to analyze the data set to extract insights.  
 ●  Tableau Storyboard: The visualizations used to answer business questions and provide recommendations.
