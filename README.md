@@ -13,7 +13,9 @@ To drive data-driven insights, it is essential to answer the following key quest
 
 ## Data
 The data set used for this analysis included the company's movie catalogue, customer demographic, and sales data divided into 15 tables:
+
 Two fact tables: Rental and Payment Transactions.
+
 Thirteen dimension tables: Actor, Film Actor, Film, Language, Film Category, Category, Inventory, Customer, Staff, Store, Address, City, and Country.
 
 The TAR file that includes the data set used for this project can be accessed here: [Rockbuster](http://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip).
