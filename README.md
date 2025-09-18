@@ -21,4 +21,4 @@ The TAR file that includes the data set used for this project can be accessed he
 ## Analysis Deliverables
 ●  [Data Dictionary](Data_Dictionary.pdf): A document providing clear standardized descriptions and relationships about the data.  
 ●  [SQL Technical Queries](Technical_SQL_Queries): A collection of structured query files used to analyze the data set to extract insights.  
-●  Tableau Storyboard: The visualizations used to answer business questions and provide recommendations.
+●  [Tableau Storyboard](https://public.tableau.com/app/profile/giovanni.blanco/viz/RockbusterTransition/Rockbuster): The visualizations used to answer business questions and provide recommendations.
