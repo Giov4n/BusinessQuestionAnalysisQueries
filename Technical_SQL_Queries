@@ -1,0 +1,106 @@
+Question 1:
+/* 
+Query used to select the movies that contributed the most and least revenue detailing their title, genre, release year and rating
+*/
+SELECT title,	
+	name AS genre,
+	release_year,
+	rating,
+	SUM(amount) AS revenue
+FROM film	
+INNER JOIN film_category USING (film_id)	
+INNER JOIN category USING (category_id)	
+INNER JOIN inventory USING (film_id)	
+INNER JOIN rental USING (inventory_id)	
+INNER JOIN payment USING (rental_id)	
+GROUP BY title, release_year, name, rating	
+HAVING SUM(amount) NOT BETWEEN 12 AND 150	
+ORDER BY revenue DESC	
+
+Question 2:
+/*
+Query used to calculate the average rental duration per movie comparing the movie title, genre, release year, rating, replacement cost, revenue, and rental rate
+*/
+SELECT title,	
+	name AS genre,
+	release_year AS "release year",
+	rating,
+	rental_duration AS "rental duration",
+	replacement_cost AS "replacement cost",
+	COUNT(film_id)::smallint AS "count of movies",
+	SUM(amount) AS revenue,
+	AVG(rental_rate)::numeric(10,2) as "average rental rate",
+	AVG(rental_duration)::smallint as "average rental duration"
+FROM film	
+INNER JOIN film_category USING (film_id)	
+INNER JOIN category USING (category_id)	
+INNER JOIN inventory USING (film_id)	
+INNER JOIN rental USING (inventory_id)	
+INNER JOIN payment USING (rental_id)	
+GROUP BY title, release_year, name, rating, rental_duration, replacement_cost	
+ORDER BY "count of movies" DESC	
+
+Question 3:
+/*
+Query used to fetch the top 10 countries by customer count
+*/
+SELECT country AS countries,	
+	   COUNT(customer_id)::smallint AS customer_count
+FROM customer	
+INNER JOIN address USING (address_id)	
+INNER JOIN city USING (city_id)	
+INNER JOIN country USING (country_id)	
+GROUP BY country	
+ORDER BY COUNT(customer_id)::smallint DESC	
+LIMIT 10	
+
+Question 4:
+/*
+Query with a CTE used to find the top 5 customers from the top 10 cities of above top 10 countries based on amounts paid to Rockbuster
+*/
+WITH top_countries (countries) AS (SELECT country AS countries	
+FROM customer	
+INNER JOIN address USING (address_id)	
+INNER JOIN city USING (city_id)	
+INNER JOIN country USING (country_id)	
+GROUP BY country	
+ORDER BY COUNT(customer_id)::smallint DESC	
+LIMIT 10),	
+top_cities (cities) AS (SELECT city AS cities	
+FROM customer	
+INNER JOIN address USING (address_id)	
+INNER JOIN city USING (city_id)	
+INNER JOIN country USING (country_id)	
+INNER JOIN top_countries ON countries = country	
+GROUP BY city	
+ORDER BY COUNT(customer_id)::smallint DESC	
+LIMIT 10)	
+SELECT customer_id::SMALLINT as top_customers, first_name||' '||last_name AS customer_name, cities, country, SUM(amount) AS amount_paid	
+FROM payment	
+INNER JOIN customer USING (customer_id)	
+INNER JOIN address USING (address_id)	
+INNER JOIN city USING (city_id)	
+INNER JOIN top_cities ON city = cities	
+INNER JOIN country USING (country_id)	
+GROUP BY top_customers, customer_name, cities, country	
+ORDER BY amount_paid DESC	
+LIMIT 5	
+
+Question 5:
+/*
+Query used to calculate total customer revenue per country, city, and store
+*/
+SELECT customer_id::SMALLINT, 	
+	   first_name||' '||last_name AS "customer name", 
+	   store_id AS store, 
+	   city, 
+	   country, 
+	   SUM(amount) AS "total revenue", 
+	   COUNT(customer_id)::smallint AS "customer count" 
+FROM payment	
+INNER JOIN customer USING (customer_id)	
+INNER JOIN address USING (address_id)	
+INNER JOIN city USING (city_id)	
+INNER JOIN country USING (country_id)	
+GROUP BY customer_id, "customer name", store_id, city, country	
+ORDER BY "total revenue" DESC	
