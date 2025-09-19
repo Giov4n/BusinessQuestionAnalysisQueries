@@ -90,6 +90,44 @@ GROUP BY top_customers, customer_name, cities, country
 ORDER BY amount_paid DESC	
 LIMIT 5	
 
+/*
+Query with a subquery used to find the top countries based on total customer count with column showing the countries of the top 5 customers.
+*/
+SELECT country, 
+	COUNT(customer_id)::smallint AS all_customer_count, 
+	COUNT(DISTINCT top_5_customers.customer_id)::smallint AS top_customer_count
+FROM customer
+INNER JOIN address USING (address_id)
+INNER JOIN city USING (city_id)
+INNER JOIN country USING (country_id)
+LEFT JOIN (SELECT customer_id::SMALLINT, 
+	SUM(amount) AS amount_paid
+FROM payment
+INNER JOIN customer USING (customer_id)
+INNER JOIN address USING (address_id)
+INNER JOIN city USING (city_id)
+WHERE city IN (SELECT city
+FROM customer
+INNER JOIN address USING (address_id)
+INNER JOIN city USING (city_id)
+INNER JOIN country USING (country_id)
+WHERE country IN (SELECT country
+FROM customer
+INNER JOIN address USING (address_id)
+INNER JOIN city USING (city_id)
+INNER JOIN country USING (country_id)
+GROUP BY country
+ORDER BY COUNT(customer_id)::smallint DESC
+LIMIT 10)
+GROUP BY city
+ORDER BY COUNT(customer_id)::smallint DESC
+LIMIT 10)
+GROUP BY customer_id, city
+ORDER BY amount_paid DESC
+LIMIT 5) top_5_customers USING (customer_id)
+GROUP BY country
+ORDER BY all_customer_count DESC
+
 Question 5:
 /*
 Query used to calculate total customer revenue per country, city, and store
