@@ -4,7 +4,7 @@
 Rockbuster Stealth LLC, a movie rental company, is adapting to the rise of streaming platforms like Netflix and Amazon Prime. To remain competitive, the company plans to leverage its movie license portfolio to launch an online video rental service. This shift requires a detailed analysis of their existing databases to inform the launch strategy and ensure the success of the new service. This GitHub repository features the PostgreSQL queries used to support this strategic growth and to address key business questions. The results are visualized using Tableau Public to clearly communicate the actionable insights to Rockbuster management.
 
 ## Key Questions
-To drive data-driven insights, it is essential to answer the following key questions.  
+To drive data-driven insights, it was essential to answer the following key questions.  
 1.  Which movies contributed the most/least to revenue gain?  
 2.  What was the average rental duration for all videos?  
 3.  Which countries are Rockbuster customers based in?  
